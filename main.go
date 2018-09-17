@@ -5,9 +5,10 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
+	"go-test-project/api"
 	"log"
 	"net/http"
-	"testProject/api"
+	"os"
 )
 
 var (
@@ -17,7 +18,8 @@ var (
 
 func main() {
 	var db *sql.DB
-	connectionString := fmt.Sprintf("%s:%s@tcp(localhost:3306)/%s", "root", "password", "test")
+	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", os.Getenv("DB_USER"), os.Getenv("DB_PASS"),
+		os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_NAME"))
 
 	// open DB connection
 	var err error
