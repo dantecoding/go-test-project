@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
+	"go-test-project/models"
 	"net/http"
 	"strconv"
-	"testProject/models"
 )
 
 type EventApi struct {
