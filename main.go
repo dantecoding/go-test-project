@@ -52,6 +52,7 @@ func router() *mux.Router {
 	router.HandleFunc("/event/", event.CreateEvent).Methods("POST")
 	router.HandleFunc("/event/publish/{id}", event.PublishEvent).Methods("POST")
 	router.HandleFunc("/event/{id}", event.DeleteEvent).Methods("DELETE")
+	router.HandleFunc("/event/{id}", event.UpdateEvent).Methods("PUT")
 
 	router.Use(loggingMiddleware)
 

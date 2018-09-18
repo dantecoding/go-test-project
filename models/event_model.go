@@ -48,6 +48,13 @@ func (event *Event) UpdateEvent(db *sql.DB) error {
 	return err
 }
 
+func (event *Event) SetPublished(db *sql.DB) error {
+	statement := fmt.Sprintf("UPDATE events SET published=%d WHERE id=%d", event.isPublished(), event.ID)
+	_, err := db.Exec(statement)
+
+	return err
+}
+
 func (event *Event) isPublished() int {
 	published := 0
 	if event.Published {

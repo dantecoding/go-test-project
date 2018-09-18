@@ -73,5 +73,53 @@ func (eventApi *EventApi) DeleteEvent(w http.ResponseWriter, r *http.Request) {
 }
 
 func (eventApi *EventApi) PublishEvent(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		RespondWithError(w, http.StatusBadRequest, "Invalid listener ID")
+		return
+	}
 
+	var event models.Event
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&event); err != nil {
+		RespondWithError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	defer r.Body.Close()
+	event.ID = id
+
+	if err := event.SetPublished(eventApi.DB); err != nil {
+		RespondWithError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	RespondWithJSON(w, http.StatusOK, event)
+}
+
+func (eventApi *EventApi) UpdateEvent(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		RespondWithError(w, http.StatusBadRequest, "Invalid listener ID")
+		return
+	}
+
+	var event models.Event
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&event); err != nil {
+		RespondWithError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	defer r.Body.Close()
+	event.ID = id
+
+	if err := event.UpdateEvent(eventApi.DB); err != nil {
+		RespondWithError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	RespondWithJSON(w, http.StatusOK, event)
 }
