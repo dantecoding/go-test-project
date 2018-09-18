@@ -27,8 +27,8 @@ Run at [localhost:8000](http://localhost:8000 "localhost:8000")
 **Request**
 ```json
 {
-	"name": "event name",
-	"published": false
+    "name": "event name",
+    "published": false
 }
 ```
 **Response**
@@ -116,8 +116,8 @@ Run at [localhost:8000](http://localhost:8000 "localhost:8000")
 ```json
 {
     "event_id": 1
-	"name": "listener name",
-	"address": "http://server/hanlde"
+    "name": "listener name",
+    "address": "http://server/hanlde"
 }
 ```
 **Response**
@@ -125,8 +125,8 @@ Run at [localhost:8000](http://localhost:8000 "localhost:8000")
 {
     "id": 1,
     "event_id": 1
-	"name": "listener name",
-	"address": "http://server/hanlde"
+    "name": "listener name",
+    "address": "http://server/hanlde"
 }
 ```
 
